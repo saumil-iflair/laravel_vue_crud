@@ -27,9 +27,10 @@ Route::get('/', function(){
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::any('admin/register', [App\Http\Controllers\admin\RegisterController::class, 'index'])->name('admin/register');
-Route::get('admin/user', [App\Http\Controllers\admin\UserController::class, 'index'])->name('admin/user');
+Route::get('/add', [App\Http\Controllers\admin\RegisterController::class, 'add'])->name('add');
+Route::post('/addinsert', [App\Http\Controllers\admin\RegisterController::class, 'addinsert']);
+
+Route::get('/admin/user', [App\Http\Controllers\admin\UserController::class, 'index'])->name('admin/user');
 
 /* Login check */
-Route::post('admin/login', [App\Http\Controllers\Auth\LoginController::class,'checkAdminLogin'])->name('admin/login');
-
+Route::post('/admin/login', [App\Http\Controllers\Auth\LoginController::class,'checkAdminLogin'])->name('admin/login');

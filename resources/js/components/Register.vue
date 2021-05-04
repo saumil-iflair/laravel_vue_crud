@@ -1,59 +1,102 @@
 <template>
-   <div class="container">
-      <div class="row justify-content-center">
-         <div class="col-md-12">
-            <div class="card">
-               <div class="card-header">Register page</div>
-               <html>
-                  <head>
-                     <meta charset="UTF-8">
-                     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-                     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-                     <link rel="stylesheet" type="text/css" href="https://codepen.io/skjha5993/pen/bXqWpR.css">
-                     <title>Registration Form Using Bootstrap 4</title>
-                  </head>
-                  <body>
-                     <div class="container">
-                         <form @submit.prevent="add()" >
-                        <!-- <form action="/admin/register" method="POST" @submit="addTask()"> -->
-                           <h2 class="text-center">Join Our Network</h2>
-                           <div class="row jumbotron">
-                              <div class="col-sm-6 form-group">
-                                 <label for="name-f">First Name</label>
-                                 <input type="text" class="form-control" v-model="data.name" id="name-f" placeholder="Enter your first name.">
-                              </div>
-                              <div class="col-sm-6 form-group">
-                                 <label for="name-l">Last name</label>
-                                 <input type="text" class="form-control" name="lname" id="name-l" placeholder="Enter your last name.">
-                              </div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <div class="card">
+                    <h3><div class="card-header">Register Data</div></h3>
+                    <div class="card-body">
+                        <form @submit.prevent="addPost">
+                            <div class="row">
+                                <div class="col">
+                                    <label for="fname">first name1</label>
+                                    <input type="text" v-model="user.fname" id="fname" name="fname" class="form-control" :class="{ 'is-invalid': submitted && $v.user.fname.$error }" />
+                                    <!-- <div v-if="submitted && !$v.user.fname.required" class="invalid-feedback">first name is required</div> -->
+                                </div>
+                                   <div class="col">
+                                    <label for="lname">last name</label>
+                                    <input type="text" v-model="user.lname" id="lname" name="lname" class="form-control" :class="{ 'is-invalid': submitted && $v.user.lname.$error }" />
+                                    <!-- <div v-if="submitted && !$v.user.lname.required" class="invalid-feedback">last name is required</div> -->
+                                </div>
 
-                              <div class="col-sm-12 form-group mb-0">
-                                 <!-- <button class="btn btn-primary float-center">Submit</button> -->
-                                <button class="btn btn-success" type="submit">Save</button>
-                              </div>
-                           </div>
+                            </div>
+                            <!-- <div class="form-group">
+                                <button title="Submit" class="btn btn-outline-dark"> Add Data </button>
+                            </div> -->
+                            <br>
+                            <div class="form-group">
+                                <button class="btn btn-primary btn-sm btn-flat" type="submit">Add Record</button>
+                            </div>
                         </form>
-                     </div>
-                  </body>
-               </html>
+                    </div>
+                </div>
             </div>
-         </div>
-      </div>
-   </div>
+        </div>
+    </div>
 </template>
 
 <script>
-    export default {
-       methods: {
-            add() {
-              console.log("testing");
+// import { required } from "vuelidate/lib/validators";
+export default {
+    name: "register",
+    data() {
+        return {
+            user: {
+                fname: "",
+                lname: "",
             },
+            // selectedFile: null,
+            submitted: false
+        };
+    },
+    // validations: {
+    //     user: {
+    //         fname: { required },
+    //         lname: { required },
+    //     }
+    // },
+    methods:{
+        handleSubmit() {
+            alert("test");
+            this.submitted = true;
+            // this.$v.$touch();
+            // if (this.$v.$invalid) {
+            //     return;
+            // }
+            this.addPost();
         },
-            mounted() {
-                console.log('Add Artist Mounted.')
-            }
+        addPost(){
+            alert("checking demo");
+             var input = this.user;
+                axios.post('/addinsert',input).then(function(response){
+                    console.log("response", response);
+                }).catch((err) => {
+                    console.log(err);
+                });
+            // const formData = new FormData();
+            // Object.keys(this.user).forEach((key) => {
+            //     if (this.user[key] != null && this.user[key] != "") {
+            //         formData.append(key, this.user[key]);
+            //     }
+            // });
+            // var input = this.user;
+            // var _this = this;
+            // axios.post('/addinsert',formData).then(function(response){
+            //     if(response.data.status == 1){
+            //         setTimeout(function(){ window.location.href="/home"; }, 800);
+            //         _this.$toaster.success(response.data.msg);
+            //     }
+            //     else{
+            //         _this.$toaster.error(response.data.msg);
+            //     }
+            // }).catch((err) => {
+            //     console.log(err);
+            // });
+        }
     }
 
-
+}
 </script>
+
+<style scoped>
+
+</style>

@@ -4,6 +4,8 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\RegisterData;
+use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
 {
@@ -16,18 +18,32 @@ class RegisterController extends Controller
     {
         //
         // dd("hii");
+        // return view('admin/register');
+    }
+
+    public function add(Request $request)
+    {
+
         return view('admin/register');
     }
+    public function addinsert(Request $request)
+    {
+        // dd("test");
+        $user = array(
+            'fname' => $request->fname,
+            'lname' => $request->lname,
+        );
+        // dd($user);
+        RegisterData::insert($user);
+        // return redirect()->back();
+    }
+
 
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.

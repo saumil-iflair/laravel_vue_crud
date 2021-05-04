@@ -242,7 +242,7 @@ return [
             'submenu' => [
                 [
                     'text' => 'Add Register',
-                    'url'  => 'admin/register',
+                    'url'  => 'add',
                 ],
                 [
                     'text' => 'View Register',

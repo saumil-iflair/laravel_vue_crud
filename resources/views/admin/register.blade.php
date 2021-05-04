@@ -8,8 +8,7 @@
 
 @section('content')
     <div id="app">
-        @csrf
-    <register-demo></register-demo>
+    <register></register>
     </div>
 @stop
 

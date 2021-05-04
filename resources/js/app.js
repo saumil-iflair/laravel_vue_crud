@@ -10,13 +10,21 @@ require('./bootstrap');
 
 window.Vue = require('vue').default;
 
-import Toaster from 'v-toaster'
+import Vue from 'vue'; // Importing Vue Library
+import VueRouter from 'vue-router';
+import Toaster from 'v-toaster';
+
 
 // You need a specific loader for CSS files like https://github.com/webpack/css-loader
 import 'v-toaster/dist/v-toaster.css'
 
 // optional set default imeout, the default is 10000 (10 seconds).
+
+window.Vue = require('vue').default;
+window.Vue = Vue;
+
 Vue.use(Toaster, {timeout: 5000})
+
 
 /**
  * The following block of code may be used to automatically register your
@@ -28,11 +36,11 @@ Vue.use(Toaster, {timeout: 5000})
 
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-
+Vue.use(VueRouter);
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 // Vue.component('test-demo', require('./components/TestDemo.vue').default);
 // Vue.component('test',require('./components/Test.vue').default);
-Vue.component('register-demo',require('./components/Register.vue').default);
+Vue.component('register',require('./components/Register.vue').default);
 Vue.component('user',require('./components/User.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -42,4 +50,5 @@ Vue.component('user',require('./components/User.vue').default);
 
 const app = new Vue({
     el: '#app',
+
 });
