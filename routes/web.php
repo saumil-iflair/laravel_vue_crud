@@ -34,3 +34,8 @@ Route::get('/admin/user', [App\Http\Controllers\admin\UserController::class, 'in
 
 /* Login check */
 Route::post('/admin/login', [App\Http\Controllers\Auth\LoginController::class,'checkAdminLogin'])->name('admin/login');
+
+
+Route::get('/admin/reletionship/create', [App\Http\Controllers\Reletionship\ParentController::class,'create']);
+// Route::get('/admin/reletionship/create', [App\Http\Controllers\Reletionship\ParentController::class,'create']);
+Route::post('/admin/reletionship/create',[App\Http\Controllers\Reletionship\ParentController::class,'store']);
